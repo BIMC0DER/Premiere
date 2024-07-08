@@ -1,0 +1,14 @@
+{
+    "builtin": "False",
+    "default_enabled": "True",
+    "type": "extension",
+    "rocket_mode_compatible": "False",
+    "name": "Premiere",
+    "description": "Plugins da Premiere Engenharia",
+    "author": "BIM Coder",
+    "author_profile": "https://www.linkedin.com/company/bim-c0der/",
+    "url": "https://github.com/BIMC0DER/Premiere.git",
+    "website": "https://www.youtube.com/@_bimcoder",
+    "image": "",
+    "dependencies": []
+}
