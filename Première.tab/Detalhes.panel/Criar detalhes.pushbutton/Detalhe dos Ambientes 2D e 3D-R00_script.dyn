@@ -1100,7 +1100,7 @@
     {
       "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
       "NodeType": "PythonScriptNode",
-      "Code": "import clr\r\nclr.AddReference('RevitAPI')\r\nclr.AddReference('RevitAPIUI')\r\nclr.AddReference('RevitServices')\r\nfrom Autodesk.Revit.DB import *\r\nfrom RevitServices.Persistence import DocumentManager\r\nfrom RevitServices.Transactions import TransactionManager\r\nfrom Autodesk.Revit.UI import TaskDialog\r\n\r\n# Coletando o documento atual\r\ndoc = DocumentManager.Instance.CurrentDBDocument\r\n\r\n# Função para verificar a existência do parâmetro e sua associação com a categoria\r\ndef check_parameter_and_category(parameter_name):\r\n    # Obtendo os parâmetros do projeto\r\n    parameters = doc.ParameterBindings\r\n    it = parameters.ForwardIterator()\r\n    it.Reset()\r\n    while it.MoveNext():\r\n        definition = it.Key\r\n        binding = it.Current\r\n        \r\n        if definition.Name == parameter_name:\r\n            # Verificar se a categoria associada é a especificada\r\n            if isinstance(binding, ElementBinding):\r\n                categories = binding.Categories\r\n                for cat in categories:\r\n                    if cat.Id == ElementId(BuiltInCategory.OST_DetailComponents):\r\n                        return True\r\n    return False\r\n\r\n# Verificar se o parâmetro 'p.NÚMERO.DETALHE' existe\r\nparameter_name = IN[1]\r\nparameter_exists = check_parameter_and_category(parameter_name)\r\n\r\n# Exibir TaskDialog se o parâmetro não existir\r\nif not parameter_exists and IN[0]==\"SIM\":\r\n    TaskDialog.Show(\"Parâmetro Não Encontrado\", \"Necessário criar o parâmetro p.NÚMERO.DETALHE no projeto atual.\")\r\n\r\n# Saída do script\r\nOUT = parameter_exists",
+      "Code": "import clr\r\nclr.AddReference('RevitAPI')\r\nclr.AddReference('RevitAPIUI')\r\nclr.AddReference('RevitServices')\r\nfrom Autodesk.Revit.DB import *\r\nfrom RevitServices.Persistence import DocumentManager\r\nfrom RevitServices.Transactions import TransactionManager\r\nfrom Autodesk.Revit.UI import TaskDialog\r\n\r\n# Coletando o documento atual\r\ndoc = DocumentManager.Instance.CurrentDBDocument\r\n\r\n# Função para verificar a existência do parâmetro e sua associação com a categoria\r\ndef check_parameter_and_category(parameter_name):\r\n    # Obtendo os parâmetros do projeto\r\n    parameters = doc.ParameterBindings\r\n    it = parameters.ForwardIterator()\r\n    it.Reset()\r\n    while it.MoveNext():\r\n        definition = it.Key\r\n        binding = it.Current\r\n        \r\n        if definition.Name == parameter_name:\r\n            # Verificar se a categoria associada é a especificada\r\n            if isinstance(binding, ElementBinding):\r\n                categories = binding.Categories\r\n                for cat in categories:\r\n                    if cat.Id == ElementId(BuiltInCategory.OST_DetailComponents):\r\n                        return True\r\n    return False\r\n\r\n# Verificar se o parâmetro 'p.NÚMERO.DETALHE' existe\r\nparameter_name = IN[1]\r\nparameter_exists = check_parameter_and_category(parameter_name)\r\n\r\n# Exibir TaskDialog se o parâmetro não existir\r\nif not parameter_exists:\r\n    TaskDialog.Show(\"Parâmetro Não Encontrado\", \"Necessário criar o parâmetro p.NÚMERO.DETALHE no projeto atual.\")\r\n\r\n# Saída do script\r\nOUT = parameter_exists",
       "Engine": "IronPython2",
       "EngineName": "IronPython2",
       "VariableInputPorts": true,
@@ -1923,8 +1923,8 @@
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
-        "X": -758.75769710177644,
-        "Y": 170.03803759962989
+        "X": -749.1297852770989,
+        "Y": 166.18687286975882
       },
       {
         "Name": "Obtém as linhas da FilledRegion",
@@ -2201,7 +2201,7 @@
         "Height": 342.35968438750388,
         "FontSize": 24.0,
         "InitialTop": 557.63500075031777,
-        "InitialHeight": 321.15461543037986,
+        "InitialHeight": 296.35968438750388,
         "TextblockHeight": 49.0,
         "Background": "#FFFF931E"
       },
@@ -2223,7 +2223,7 @@
         "Height": 191.0,
         "FontSize": 24.0,
         "InitialTop": 324.79012565708365,
-        "InitialHeight": 162.0,
+        "InitialHeight": 174.86021144452053,
         "TextblockHeight": 49.0,
         "Background": "#FFFF931E"
       },
@@ -2266,8 +2266,8 @@
         "Background": "#FFC1D676"
       }
     ],
-    "X": 2396.8170504476229,
-    "Y": -75.2409824183054,
+    "X": 1434.8170504476229,
+    "Y": 16.759017581694593,
     "Zoom": 1.0386468200060344
   }
 }
