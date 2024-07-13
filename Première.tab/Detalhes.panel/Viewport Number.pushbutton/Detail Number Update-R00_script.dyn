@@ -2,7 +2,7 @@
   "Uuid": "e18bc28c-d429-4267-85f8-09b3764343f0",
   "IsCustomNode": false,
   "Description": "",
-  "Name": "Detail Number Update",
+  "Name": "Detail Number Update - Iron Python",
   "ElementResolver": {
     "ResolutionMap": {}
   },
@@ -12,9 +12,9 @@
     {
       "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
       "NodeType": "PythonScriptNode",
-      "Code": "import clr\r\nclr.AddReference('RevitServices')\r\nimport RevitServices\r\nfrom RevitServices.Persistence import DocumentManager\r\nfrom RevitServices.Transactions import TransactionManager\r\n\r\nclr.AddReference('RevitAPI')\r\nimport Autodesk\r\nfrom Autodesk.Revit.DB import *\r\nfrom Autodesk.Revit.UI import *\r\n\r\n# Obter o documento ativo\r\ndoc = DocumentManager.Instance.CurrentDBDocument\r\n\r\n# Obter a vista ativa\r\nactive_view = doc.ActiveView\r\n\r\n# Obter todas as viewports da prancha atual (vista ativa)\r\nviewports = FilteredElementCollector(doc, active_view.Id).OfCategory(BuiltInCategory.OST_Viewports).ToElements()\r\n\r\n# Lista para armazenar viewports que falharem na atribuição do número de detalhe\r\nfailed_viewports = []\r\n\r\n# Iniciar a transação\r\nTransactionManager.Instance.EnsureInTransaction(doc)\r\n\r\nfor viewport in viewports:\r\n    # Obter a vista associada à viewport\r\n    view = doc.GetElement(viewport.ViewId)\r\n    \r\n    # Verificar se a vista é uma vista de piso\r\n    if view.ViewType == ViewType.FloorPlan:\r\n        \r\n        # Capturar os 2 últimos dígitos do nome da vista\r\n        view_name = view.Name\r\n        last_two_digits = view_name[-2:]\r\n        \r\n        \r\n        # Atribuir ao parâmetro \"Número de Detalhe\"\r\n        detail_number_param = view.get_Parameter(BuiltInParameter.VIEWPORT_DETAIL_NUMBER)\r\n        detail_number_param.Set(last_two_digits)\r\n            \r\n \r\n# Finalizar a transação\r\nTransactionManager.Instance.TransactionTaskDone()\r\n\r\n# Verificar se há viewports que falharam\r\nif failed_viewports:\r\n    message = \"Não foi possível adicionar o número de detalhe às vistas selecionadas. Confira se esse número já não está inserido em outra vista da prancha atual.\"\r\n    # Exibir mensagem de erro\r\n    TaskDialog.Show(\"Erro\", message)\r\nelse:\r\n    TaskDialog.Show(\"Aviso\",\"Números de detalhe atualizados com sucesso!\")\r\n \r\nOUT = 0     ",
-      "Engine": "CPython3",
-      "EngineName": "CPython3",
+      "Code": "import clr\r\nclr.AddReference('RevitServices')\r\nimport RevitServices\r\nfrom RevitServices.Persistence import DocumentManager\r\nfrom RevitServices.Transactions import TransactionManager\r\n\r\nclr.AddReference('RevitAPI')\r\nclr.AddReference('RevitAPIUI')\r\nimport Autodesk\r\nfrom Autodesk.Revit.DB import *\r\nfrom Autodesk.Revit.UI import *\r\n\r\n# Obter o documento ativo\r\ndoc = DocumentManager.Instance.CurrentDBDocument\r\n\r\n# Obter a vista ativa\r\nactive_view = doc.ActiveView\r\n\r\n# Obter todas as viewports da prancha atual (vista ativa)\r\nviewports = FilteredElementCollector(doc, active_view.Id).OfCategory(BuiltInCategory.OST_Viewports).ToElements()\r\n\r\n# Lista para armazenar viewports que falharem na atribuição do número de detalhe\r\nfailed_viewports = []\r\n\r\n# Iniciar a transação\r\nTransactionManager.Instance.EnsureInTransaction(doc)\r\n\r\nfor viewport in viewports:\r\n    # Obter a vista associada à viewport\r\n    view = doc.GetElement(viewport.ViewId)\r\n    \r\n    # Verificar se a vista é uma vista de piso\r\n    if view.ViewType == ViewType.FloorPlan:\r\n        \r\n        # Capturar os 2 últimos dígitos do nome da vista\r\n        view_name = view.Name\r\n        last_two_digits = view_name[-3:]\r\n        \r\n        \r\n        # Atribuir ao parâmetro \"Número de Detalhe\"\r\n        detail_number_param = view.get_Parameter(BuiltInParameter.VIEWPORT_DETAIL_NUMBER)\r\n        detail_number_param.Set(last_two_digits)\r\n            \r\n \r\n# Finalizar a transação\r\nTransactionManager.Instance.TransactionTaskDone()\r\n\r\n# Verificar se há viewports que falharam\r\nif failed_viewports:\r\n    message = \"Não foi possível adicionar o número de detalhe às vistas selecionadas. Confira se esse número já não está inserido em outra vista da prancha atual.\"\r\n    # Exibir mensagem de erro\r\n    TaskDialog.Show(\"Erro\", message)\r\nelse:\r\n    TaskDialog.Show(\"Aviso\",\"Números de detalhe atualizados com sucesso!\")\r\n \r\nOUT = 0     ",
+      "Engine": "IronPython2",
+      "EngineName": "IronPython2",
       "VariableInputPorts": true,
       "Id": "790376f61113492cb9a475120c034dfb",
       "Inputs": [
@@ -105,8 +105,8 @@
       }
     ],
     "Annotations": [],
-    "X": 58.0,
-    "Y": -818.3,
-    "Zoom": 3.4
+    "X": 22.149759919005589,
+    "Y": -234.07383828415379,
+    "Zoom": 1.8569439135452277
   }
 }
